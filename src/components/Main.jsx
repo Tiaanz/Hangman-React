@@ -14,7 +14,13 @@ const hintIndex = getRamdonIndex(hints)
 const wordsArray = data[hints[hintIndex]]
 const ramdonWordsIndex = getRamdonIndex(wordsArray)
 const lettersArray = wordsArray[ramdonWordsIndex].split('')
-const initialArray = lettersArray.map((item) => '___')
+const initialArray = lettersArray.map((item) => {
+  if (item === ' ') {
+    return ' '
+  } else {
+    return '_'
+  }
+})
 
 const Main = () => {
   const [dynamicArray, setDynamicArray] = useState(initialArray)
@@ -30,6 +36,8 @@ const Main = () => {
       if (item === letter) {
         guessArr[i] = letter
         setGuess('')
+      } else if (item === '') {
+        guessArr[i] = ''
       }
     })
 
@@ -41,6 +49,7 @@ const Main = () => {
         } else {
           setCount(count - 1)
           setShowLose(true)
+          setGuess('')
         }
       }
     }
@@ -51,18 +60,14 @@ const Main = () => {
   }
 
   const checkWin = (arr) => {
-      for (let i = 0; i < arr.length; i++) {
-        if (arr[i] !== lettersArray[i]) return false
-      }
-      return true
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] !== lettersArray[i]) return false
+    }
+    return true
   }
 
   const reset = () => {
-    setCount(8)
-    setShowLose(false)
-    setShowWin(false)
-    setGuess('')
-    setDynamicArray(initialArray)
+    window.location.reload(false)
   }
 
   return (
@@ -111,7 +116,7 @@ const Main = () => {
             Submit
           </Button>
           <Box sx={{ textAlign: 'center', margin: '10px 0' }}>
-            {((showLose && count === 0) || showWin) && (
+            {(showLose || showWin) && (
               <Button
                 color="secondary"
                 variant="contained"

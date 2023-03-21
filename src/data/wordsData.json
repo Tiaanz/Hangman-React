@@ -1,5 +1,7 @@
 {
   "fruit": ["apple", "banana", "orange"],
 
-  "animal": ["kiwi", "bear", "fish"]
+  "animal": ["kiwi", "bear", "fish"],
+
+  "movie":["titanic","avatar","spider man"]
 }
