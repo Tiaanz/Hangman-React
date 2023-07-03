@@ -32,6 +32,7 @@ const Main = () => {
 
   const checkLetter = (letter) => (e) => {
     e.preventDefault()
+   
     lettersArray.forEach((item, i) => {
       if (item === letter) {
         guessArr[i] = letter
@@ -101,7 +102,7 @@ const Main = () => {
         <form onSubmit={checkLetter(guess)}>
           <Input
             id="guess"
-            placeholder="Enter your guess"
+            placeholder="Enter a letter to guess"
             name="guess"
             autoFocus
             value={guess}
